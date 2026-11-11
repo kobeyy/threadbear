@@ -35,11 +35,31 @@ export const SCENARIOS: Scenario[] = [
     },
   },
   {
+    name: 'a card with a command to run',
+    shows: ['Backfill the titles on prod?', 'npx convex run --prod migrations:backfill'],
+    play: (p) => {
+      p.say('It needs your OK for prod.');
+      p.runAsks();
+      p.endTurn({ needs: 'you', asks: [{ question: 'Backfill the titles on prod?', run: 'npx convex run --prod migrations:backfill' }] });
+    },
+  },
+  {
     name: 'a done card with follow-ups',
     shows: ['Landed it.', 'Make the phone show Stop on a running thread', 'Check the website draws the new card'],
     play: (p) => {
       p.say('Landed it.');
       p.endTurn({ needs: 'nothing', next: ['Make the phone show Stop on a running thread', 'Check the website draws the new card'] });
+    },
+  },
+  {
+    // The box itself needs 12 quiet hours, which a seeded thread doesn't
+    // have, so `shows` is the reply and the routes compare the recap.
+    name: 'a thread the librarian has written a recap for',
+    shows: ['Parked until Nipunn replies.'],
+    play: (p) => {
+      p.say('Parked until Nipunn replies.');
+      p.endTurn({ needs: 'nothing' });
+      p.librarianWrites('- Asked Nipunn how to go ahead\n- Nothing goes out until he replies', 'A community port of the clients, and what to say about it.');
     },
   },
   {

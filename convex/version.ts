@@ -317,4 +317,9 @@
 // 69: phone:interrupt, Stop on the phone and the website: queues an
 //    `interrupt` command for the thread's runner, which runners have applied
 //    since 44. An older phone has no Stop.
-export const API_VERSION = 69;
+// 70: threads and threadIndex rows carry `recap`, the librarian's recap for
+//    the recap box. A runner sends it only from 70.
+// 71: an open card's asks can carry `run`, a command and the id of the Run
+//    button that runs it (phone:press). A runner sends it only from 71; an
+//    older phone just doesn't show it.
+export const API_VERSION = 71;

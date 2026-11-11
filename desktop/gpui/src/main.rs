@@ -2,6 +2,8 @@
 // with GPUI and gpui-kit's components. GPUI has no tokio, so the
 // connection runs on a runtime of its own and hands its events across on a
 // channel; requests run there too and their results come back as tasks.
+// Read-outs that exist only for the scripted control (`automation.rs`).
+#![cfg_attr(not(feature = "automation"), allow(dead_code, unused_imports))]
 mod app;
 #[cfg(feature = "automation")]
 mod automation;
@@ -10,6 +12,8 @@ mod composer_card;
 mod composer_chips;
 mod files;
 mod folders;
+#[cfg(feature = "frame-stats")]
+mod frame_stats;
 mod header;
 mod highlights;
 mod highlights_project;
@@ -17,6 +21,7 @@ mod highlights_store;
 mod icons;
 mod move_sheet;
 mod new_thread;
+mod open_gate;
 mod patches;
 mod prefs;
 mod rails;
